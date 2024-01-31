@@ -1,24 +1,37 @@
-import logo from './logo.svg';
 import './App.css';
+import { useEffect, useState } from "react"
+import axios from 'axios'
+import SearchBar from './components/SearchBar/SearchBar';
+import SearchResults from './components/SearchResults/SearchResults'
 
 function App() {
+
+  const url = "https://api.bing.microsoft.com/v7.0/search?q="
+  const [results, setResults] = useState([]);
+  useEffect(() => {
+
+  }, [results]);
+  const handleOnClick = async (searchText) => {
+
+      try {
+          const resp = await axios(url + searchText, {
+              headers: {
+                  "Ocp-Apim-Subscription-Key": "bae31376894e48e780be5c3519645c2b"
+              },
+          })
+          setResults(resp.data.webPages.value)
+      } catch(error) {
+
+      }
+
+  }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="layout">
+        <div className='box b1'><SearchBar handleOnClick={handleOnClick}/></div>
+        <div className='box b2'><SearchResults results = {results}></SearchResults></div>
+      </div>
   );
 }
 

@@ -1,0 +1,17 @@
+.searchbar{
+    text-align: center;
+
+    input{
+        width: 70%;
+        height: fit-content;
+    }
+
+    button{
+        margin-left: 3px;
+        width: 20%;
+        background-color: lightseagreen;
+        color: white;
+        border-color: lightseagreen;
+        border-radius: 5px;
+    }
+}
